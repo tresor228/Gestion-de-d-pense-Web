@@ -3,6 +3,7 @@ package services
 import (
 	"gestion-de-depense/backend/internal/models"
 	"gestion-de-depense/backend/internal/repositories"
+	"gestion-de-depense/backend/pkg/auth"
 
 	"golang.org/x/crypto/bcrypt"
 )
