@@ -1,8 +1,8 @@
 package services
 
 import (
-	"expense-tracker/internal/models"
-	"expense-tracker/internal/repositories"
+	"gestion-de-depense/backend/internal/models"
+	"gestion-de-depense/backend/internal/repositories"
 )
 
 // TransactionService gère la logique métier des transactions

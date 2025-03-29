@@ -1,7 +1,7 @@
 package repositories
 
 import (
-	"expense-tracker/internal/models"
+	"gestion-de-depense/backend/internal/models"
 
 	"gorm.io/gorm"
 )

@@ -1,8 +1,8 @@
 package routes
 
 import (
-	"expense-tracker/internal/handlers"
-	"expense-tracker/internal/middleware"
+	"gestion-de-depense/backend/internal/handlers"
+	"gestion-de-depense/backend/pkg/middleware"
 
 	"github.com/gofiber/fiber/v2"
 )

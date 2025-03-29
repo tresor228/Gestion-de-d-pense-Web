@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"expense-tracker/internal/services"
+	"gestion-de-depense/backend/internal/services"
 
 	"github.com/gofiber/fiber/v2"
 )

@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	"expense-tracker/pkg/auth"
+	"gestion-de-depense/backend/pkg/auth"
 	"strings"
 
 	"github.com/gofiber/fiber/v2"

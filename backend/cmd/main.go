@@ -1,11 +1,11 @@
 package main
 
 import (
-	"expense-tracker/internal/handlers"
-	"expense-tracker/internal/models"
-	"expense-tracker/internal/repositories"
-	"expense-tracker/internal/routes"
-	"expense-tracker/internal/services"
+	"gestion-de-depense/backend/internal/handlers"
+	"gestion-de-depense/backend/internal/models"
+	"gestion-de-depense/backend/internal/repositories"
+	"gestion-de-depense/backend/internal/routes"
+	"gestion-de-depense/backend/internal/services"
 	"log"
 
 	"github.com/gofiber/fiber/v2"
