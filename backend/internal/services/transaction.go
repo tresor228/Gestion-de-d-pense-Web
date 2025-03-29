@@ -1,0 +1,28 @@
+package services
+
+import (
+	"expense-tracker/internal/models"
+	"expense-tracker/internal/repositories"
+)
+
+// TransactionService gère la logique métier des transactions
+type TransactionService struct {
+	TransactionRepo *repositories.TransactionRepository
+}
+
+// NewTransactionService crée un nouveau service transaction
+func NewTransactionService(transactionRepo *repositories.TransactionRepository) *TransactionService {
+	return &TransactionService{TransactionRepo: transactionRepo}
+}
+
+// AddTransaction ajoute une transaction
+func (s *TransactionService) AddTransaction(userID uint, amount float64, transType string) (*models.Transaction, error) {
+	transaction := &models.Transaction{
+		UserID: userID,
+		Amount: amount,
+		Type:   transType,
+	}
+
+	err := s.TransactionRepo.CreateTransaction(transaction)
+	return transaction, err
+}
