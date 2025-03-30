@@ -6,23 +6,23 @@ import (
 	"gorm.io/gorm"
 )
 
-// TransactionRepository gère les opérations liées aux transactions.
-type TransactionRepository struct {
+// Struture pour le dépôt de transaction
+type Gestionnaire_Transaction struct {
 	DB *gorm.DB
 }
 
-// NewTransactionRepository crée une nouvelle instance de TransactionRepository.
-func NewTransactionRepository(db *gorm.DB) *TransactionRepository {
-	return &TransactionRepository{DB: db}
+// Nouvelle instance de Gestionnaire de Transaction
+func Initialisation_Gestionnaire_Transaction(db *gorm.DB) *Gestionnaire_Transaction {
+	return &Gestionnaire_Transaction{DB: db}
 }
 
-// CreateTransaction ajoute une nouvelle transaction.
-func (r *TransactionRepository) CreateTransaction(transaction *models.Transaction) error {
+// Ajout d'une transaction
+func (r *Gestionnaire_Transaction) Create_Transaction(transaction *models.Transaction) error {
 	return r.DB.Create(transaction).Error
 }
 
-// GetTransactionByID récupère une transaction par ID.
-func (r *TransactionRepository) GetTransactionByID(id uint) (*models.Transaction, error) {
+// Récupération d'une transaction par Mail
+func (r *Gestionnaire_Transaction) Recuperation_Trans_Mail(id uint) (*models.Transaction, error) {
 	var transaction models.Transaction
 	if err := r.DB.First(&transaction, id).Error; err != nil {
 		return nil, err
@@ -30,8 +30,8 @@ func (r *TransactionRepository) GetTransactionByID(id uint) (*models.Transaction
 	return &transaction, nil
 }
 
-// GetTransactionsByUserID récupère toutes les transactions d'un utilisateur.
-func (r *TransactionRepository) GetTransactionsByUserID(userID uint) ([]models.Transaction, error) {
+// Recuperation Mail par ID
+func (r *Gestionnaire_Transaction) Recuperation_Trans_ID(userID uint) ([]models.Transaction, error) {
 	var transactions []models.Transaction
 	if err := r.DB.Where("user_id = ?", userID).Find(&transactions).Error; err != nil {
 		return nil, err
@@ -39,12 +39,12 @@ func (r *TransactionRepository) GetTransactionsByUserID(userID uint) ([]models.T
 	return transactions, nil
 }
 
-// UpdateTransaction met à jour une transaction existante.
-func (r *TransactionRepository) UpdateTransaction(transaction *models.Transaction) error {
+// Mise à jour d'une transaction
+func (r *Gestionnaire_Transaction) Mise_a_jour_Transaction(transaction *models.Transaction) error {
 	return r.DB.Save(transaction).Error
 }
 
-// DeleteTransaction supprime une transaction.
-func (r *TransactionRepository) DeleteTransaction(id uint) error {
+// Suppression d'une transaction
+func (r *Gestionnaire_Transaction) Suppression_Transaction(id uint) error {
 	return r.DB.Delete(&models.Transaction{}, id).Error
 }

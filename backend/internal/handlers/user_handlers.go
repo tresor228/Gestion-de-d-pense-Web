@@ -10,24 +10,24 @@ type Gestion_Utilisateur struct {
 	Service_de_user *services.Service_Utilisateur
 }
 
-// NewUserHandler crée un handler utilisateur
+// Constructeur pour le gestionnaire d'utilisateur
 func NewGestion_Utilisateur(userService *services.Service_Utilisateur) *Gestion_Utilisateur {
 	return &Gestion_Utilisateur{Service_de_user: userService}
 }
 
-// Register gère l'inscription
+// Fonctionnnalité pour la gestion de l'inscription
 func (h *Gestion_Utilisateur) Inscription(c *fiber.Ctx) error {
-	type Request struct {
+	type Requête struct {
 		Email    string `json:"email"`
 		Password string `json:"password"`
 	}
 
-	var req Request
+	var req Requête
 	if err := c.BodyParser(&req); err != nil {
 		return c.Status(400).JSON(fiber.Map{"error": "Invalid request"})
 	}
 
-	user, err := h.Service_de_user.Inscription_User(req.Email, req.Password)
+	user, err := h.Service_de_user.Inscription_Utilisateur(req.Email, req.Password)
 	if err != nil {
 		return c.Status(500).JSON(fiber.Map{"error": "Failed to register"})
 	}
@@ -35,19 +35,19 @@ func (h *Gestion_Utilisateur) Inscription(c *fiber.Ctx) error {
 	return c.Status(201).JSON(user)
 }
 
-// Login gère la connexion
+// Fonctionnnalité pour la gestion de la connexion
 func (h *Gestion_Utilisateur) Connexion(c *fiber.Ctx) error {
-	type Request struct {
+	type Requête struct {
 		Email    string `json:"email"`
 		Password string `json:"password"`
 	}
 
-	var req Request
+	var req Requête
 	if err := c.BodyParser(&req); err != nil {
 		return c.Status(400).JSON(fiber.Map{"error": "Invalid request"})
 	}
 
-	token, err := h.Service_de_user.LoginUser(req.Email, req.Password)
+	token, err := h.Service_de_user.Connexion_utilisateur(req.Email, req.Password)
 	if err != nil {
 		return c.Status(401).JSON(fiber.Map{"error": "Invalid credentials"})
 	}

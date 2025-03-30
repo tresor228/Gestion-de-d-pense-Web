@@ -10,16 +10,16 @@ import (
 
 // logique des utilisateurs
 type Service_Utilisateur struct {
-	UserRepo *repositories.UserRepository
+	UserRepo *repositories.Depot_Utilisateur
 }
 
 // NewUserService crée une nouvelle instance
-func NewUserService(userRepo *repositories.UserRepository) *Service_Utilisateur {
+func Initilisation_Service_Utilisteur(userRepo *repositories.Depot_Utilisateur) *Service_Utilisateur {
 	return &Service_Utilisateur{UserRepo: userRepo}
 }
 
-// RegisterUser enregistre un utilisateur
-func (s *Service_Utilisateur) RegisterUser(email, password string) (*models.Utilisateur, error) {
+// Inscription d'un utilisateur
+func (s *Service_Utilisateur) Inscription_Utilisateur(email, password string) (*models.Utilisateur, error) {
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	if err != nil {
 		return nil, err
@@ -30,13 +30,13 @@ func (s *Service_Utilisateur) RegisterUser(email, password string) (*models.Util
 		Password: string(hashedPassword),
 	}
 
-	err = s.UserRepo.CreateUser(user)
+	err = s.UserRepo.Ajout_Utilisateur(user)
 	return user, err
 }
 
-// LoginUser vérifie l'utilisateur et génère un token JWT
-func (s *Service_Utilisateur) LoginUser(email, password string) (string, error) {
-	user, err := s.UserRepo.GetUserByEmail(email)
+// Connexion Utilisateur authentifie l'utilisateur et génère un jeton JWT
+func (s *Service_Utilisateur) Connexion_utilisateur(email, password string) (string, error) {
+	user, err := s.UserRepo.Recuperation_user_par_mail(email)
 	if err != nil {
 		return "", err
 	}

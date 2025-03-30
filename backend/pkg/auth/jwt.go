@@ -11,7 +11,7 @@ import (
 func GenerateToken(userID uint) (string, error) {
 	claims := jwt.MapClaims{
 		"user_id": userID,
-		"exp":     time.Now().Add(time.Hour * 72).Unix(), // Expiration dans 3 jours
+		"exp":     time.Now().Add(time.Hour * 72).Unix(),
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
@@ -25,7 +25,7 @@ func GenerateToken(userID uint) (string, error) {
 	return tokenString, nil
 }
 
-// ValidateToken vérifie si un token est valide
+// Verification du token JWT
 func ValidateToken(tokenString string) (*jwt.Token, error) {
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 		return []byte(os.Getenv("JWT_SECRET")), nil

@@ -6,23 +6,23 @@ import (
 	"gorm.io/gorm"
 )
 
-// UserRepository définit les méthodes d'accès aux données utilisateur.
-type UserRepository struct {
+// Structeure pour le dépôt d'utilisateur
+type Depot_Utilisateur struct {
 	DB *gorm.DB
 }
 
-// NewUserRepository crée une nouvelle instance de UserRepository.
-func NewUserRepository(db *gorm.DB) *UserRepository {
-	return &UserRepository{DB: db}
+// Nouvelle instance de Depot Utilisateur
+func Initialisation_Depot_Utilisateur(db *gorm.DB) *Depot_Utilisateur {
+	return &Depot_Utilisateur{DB: db}
 }
 
-// CreateUser ajoute un nouvel utilisateur dans la base de données.
-func (r *UserRepository) CreateUser(user *models.Utilisateur) error {
+// Ajout d'un Utilisateur
+func (r *Depot_Utilisateur) Ajout_Utilisateur(user *models.Utilisateur) error {
 	return r.DB.Create(user).Error
 }
 
-// GetUserByEmail recherche un utilisateur par email.
-func (r *UserRepository) GetUserByEmail(email string) (*models.Utilisateur, error) {
+// Recherche un Utilisateur par email
+func (r *Depot_Utilisateur) Recuperation_user_par_mail(email string) (*models.Utilisateur, error) {
 	var user models.Utilisateur
 	if err := r.DB.Where("email = ?", email).First(&user).Error; err != nil {
 		return nil, err
@@ -30,8 +30,8 @@ func (r *UserRepository) GetUserByEmail(email string) (*models.Utilisateur, erro
 	return &user, nil
 }
 
-// GetUserByID recherche un utilisateur par ID.
-func (r *UserRepository) GetUserByID(id uint) (*models.Utilisateur, error) {
+// Recherche un Utilisateur par ID
+func (r *Depot_Utilisateur) Recuperation_user_par_ID(id uint) (*models.Utilisateur, error) {
 	var user models.Utilisateur
 	if err := r.DB.First(&user, id).Error; err != nil {
 		return nil, err
@@ -39,12 +39,12 @@ func (r *UserRepository) GetUserByID(id uint) (*models.Utilisateur, error) {
 	return &user, nil
 }
 
-// UpdateUser met à jour un utilisateur existant.
-func (r *UserRepository) UpdateUser(user *models.Utilisateur) error {
+// Mise a jour d'un Utilisateur
+func (r *Depot_Utilisateur) Mise_a_jour_Utilisateur(user *models.Utilisateur) error {
 	return r.DB.Save(user).Error
 }
 
-// DeleteUser supprime un utilisateur.
-func (r *UserRepository) DeleteUser(id uint) error {
+// Supprimer un Utilisateur
+func (r *Depot_Utilisateur) Supprimer_un_Utilisateur(id uint) error {
 	return r.DB.Delete(&models.Utilisateur{}, id).Error
 }

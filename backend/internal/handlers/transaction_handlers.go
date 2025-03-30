@@ -7,16 +7,16 @@ import (
 )
 
 type TransactionHandler struct {
-	TransactionService *services.TransactionService
+	TransactionService *services.Transaction_Service
 }
 
 // NewTransactionHandler crée un handler transaction
-func NewTransactionHandler(transactionService *services.TransactionService) *TransactionHandler {
+func NewTransactionHandler(transactionService *services.Transaction_Service) *TransactionHandler {
 	return &TransactionHandler{TransactionService: transactionService}
 }
 
 // AddTransaction ajoute une transaction
-func (h *TransactionHandler) AddTransaction(c *fiber.Ctx) error {
+func (h *TransactionHandler) Ajout_Transaction(c *fiber.Ctx) error {
 	type Request struct {
 		UserID uint    `json:"user_id"`
 		Amount float64 `json:"amount"`
@@ -28,7 +28,7 @@ func (h *TransactionHandler) AddTransaction(c *fiber.Ctx) error {
 		return c.Status(400).JSON(fiber.Map{"error": "Invalid request"})
 	}
 
-	transaction, err := h.TransactionService.AddTransaction(req.UserID, req.Amount, req.Type)
+	transaction, err := h.TransactionService.Create_Transaction(req.UserID, req.Amount, req.Type)
 	if err != nil {
 		return c.Status(500).JSON(fiber.Map{"error": "Failed to add transaction"})
 	}

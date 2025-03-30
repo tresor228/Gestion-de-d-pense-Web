@@ -5,24 +5,24 @@ import (
 	"gestion-de-depense/backend/internal/repositories"
 )
 
-// TransactionService gère la logique métier des transactions
-type TransactionService struct {
-	TransactionRepo *repositories.TransactionRepository
+// structure pour le service de transaction
+type Transaction_Service struct {
+	TransactionRepo *repositories.Gestionnaire_Transaction
 }
 
-// NewTransactionService crée un nouveau service transaction
-func NewTransactionService(transactionRepo *repositories.TransactionRepository) *TransactionService {
-	return &TransactionService{TransactionRepo: transactionRepo}
+// Initialisation de Transaction Service
+func Initialisation_Transaction_Service(transactionRepo *repositories.Gestionnaire_Transaction) *Transaction_Service {
+	return &Transaction_Service{TransactionRepo: transactionRepo}
 }
 
-// AddTransaction ajoute une transaction
-func (s *TransactionService) AddTransaction(userID uint, montant float64, transType string) (*models.Transaction, error) {
+// Ajoutez une nouvelle transaction
+func (s *Transaction_Service) Create_Transaction(userID uint, montant float64, transType string) (*models.Transaction, error) {
 	transaction := &models.Transaction{
 		UserID:  userID,
 		Montant: montant,
 		Type:    transType,
 	}
 
-	err := s.TransactionRepo.CreateTransaction(transaction)
+	err := s.TransactionRepo.Create_Transaction(transaction)
 	return transaction, err
 }

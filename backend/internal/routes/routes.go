@@ -12,10 +12,10 @@ func SetupRoutes(app *fiber.App, userHandler *handlers.Gestion_Utilisateur, tran
 	api := app.Group("/api")
 
 	// Routes publiques
-	api.Post("/register", userHandler.Inscription)
-	api.Post("/login", userHandler.Connexion)
+	api.Post("/Inscription", userHandler.Inscription)
+	api.Post("/Connexion", userHandler.Connexion)
 
 	// Routes protégées
 	api.Use(middleware.AuthMiddleware)
-	api.Post("/transaction", transactionHandler.AddTransaction)
+	api.Post("/transaction", transactionHandler.Ajout_Transaction)
 }

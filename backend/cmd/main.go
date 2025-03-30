@@ -40,15 +40,15 @@ func main() {
 	db.AutoMigrate(&models.Utilisateur{}, &models.Transaction{})
 
 	// Initialisation des repositories
-	userRepo := repositories.NewUserRepository(db)
-	transactionRepo := repositories.NewTransactionRepository(db)
+	userRepo := repositories.Initialisation_Depot_Utilisateur(db)
+	transactionRepo := repositories.Initialisation_Gestionnaire_Transaction(db)
 
 	// Initialisation des services
-	userService := services.NewUserService(userRepo)
-	transactionService := services.NewTransactionService(transactionRepo)
+	userService := services.Initilisation_Service_Utilisteur(userRepo)
+	transactionService := services.Initialisation_Transaction_Service(transactionRepo)
 
 	// Initialisation des handlers
-	userHandler := handlers.NewUserHandler(userService)
+	userHandler := handlers.NewGestion_Utilisateur(userService)
 	transactionHandler := handlers.NewTransactionHandler(transactionService)
 
 	// Création de l'application Fiber
