@@ -12,22 +12,22 @@ import (
 func AuthMiddleware(c *fiber.Ctx) error {
 	authHeader := c.Get("Authorization")
 	if authHeader == "" {
-		return c.Status(401).JSON(fiber.Map{"error": "Unauthorized"})
+		return c.Status(401).JSON(fiber.Map{"erreur": "Authentique Echouée"})
 	}
 
 	tokenString := strings.Split(authHeader, "Bearer ")
 	if len(tokenString) != 2 {
-		return c.Status(401).JSON(fiber.Map{"error": "Invalid token format"})
+		return c.Status(401).JSON(fiber.Map{"erreur": "Format d'authentification invalide"})
 	}
 
 	token, err := auth.ValidateToken(tokenString[1])
 	if err != nil || !token.Valid {
-		return c.Status(401).JSON(fiber.Map{"error": "Invalid token"})
+		return c.Status(401).JSON(fiber.Map{"erreur": "Authentification Invalide"})
 	}
 
 	claims, ok := token.Claims.(jwt.MapClaims)
 	if !ok {
-		return c.Status(401).JSON(fiber.Map{"error": "Invalid token claims"})
+		return c.Status(401).JSON(fiber.Map{"erreur": "Informations du jeton incorrectes"})
 	}
 
 	c.Locals("user_id", claims["user_id"])

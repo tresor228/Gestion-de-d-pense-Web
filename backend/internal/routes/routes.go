@@ -8,7 +8,7 @@ import (
 )
 
 // SetupRoutes initialise les routes
-func SetupRoutes(app *fiber.App, userHandler *handlers.Gestion_Utilisateur, transactionHandler *handlers.TransactionHandler) {
+func SetupRoutes(app *fiber.App, userHandler *handlers.Gestion_Utilisateur, transactionHandler *handlers.Controleur_Transaction) {
 	api := app.Group("/api")
 
 	// Routes publiques

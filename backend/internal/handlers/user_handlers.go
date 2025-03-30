@@ -44,12 +44,12 @@ func (h *Gestion_Utilisateur) Connexion(c *fiber.Ctx) error {
 
 	var req Requête
 	if err := c.BodyParser(&req); err != nil {
-		return c.Status(400).JSON(fiber.Map{"error": "Invalid request"})
+		return c.Status(400).JSON(fiber.Map{"erreur": "Requête invalide"})
 	}
 
 	token, err := h.Service_de_user.Connexion_utilisateur(req.Email, req.Password)
 	if err != nil {
-		return c.Status(401).JSON(fiber.Map{"error": "Invalid credentials"})
+		return c.Status(401).JSON(fiber.Map{"erreur": "Identifiants incorrects"})
 	}
 
 	return c.JSON(fiber.Map{"token": token})

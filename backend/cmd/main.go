@@ -15,25 +15,17 @@ import (
 	"github.com/joho/godotenv"
 )
 
-func init() {
-	// Chargement du fichier .env
-	err := godotenv.Load(".env")
-	if err != nil {
-		log.Fatal("Erreur lors du chargement du fichier .env")
-	}
-}
-
 func main() {
 	// Charger .env
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		log.Fatal("Erreur du Chargement du fichier .env")
 	}
 
 	// Connexion DB
 	db, err := gorm.Open(sqlite.Open("expenses.db"), &gorm.Config{})
 	if err != nil {
-		log.Fatal("Failed to connect to database")
+		log.Fatal("Connexion à la base de données échouée")
 	}
 
 	// Migration des modèles
@@ -49,13 +41,13 @@ func main() {
 
 	// Initialisation des handlers
 	userHandler := handlers.NewGestion_Utilisateur(userService)
-	transactionHandler := handlers.NewTransactionHandler(transactionService)
+	Controleur_Transaction := handlers.Initialisation_Gest_Transaction(transactionService)
 
 	// Création de l'application Fiber
 	app := fiber.New()
 
 	// Définition des routes
-	routes.SetupRoutes(app, userHandler, transactionHandler)
+	routes.SetupRoutes(app, userHandler, Controleur_Transaction)
 
 	// Lancement du serveur
 	log.Fatal(app.Listen(":8080"))
