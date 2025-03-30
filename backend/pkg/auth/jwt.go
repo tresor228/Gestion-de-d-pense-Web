@@ -7,7 +7,7 @@ import (
 	"github.com/golang-jwt/jwt/v4"
 )
 
-// GenerateToken génère un JWT pour un utilisateur donné
+// Authentification de l'utilisateur
 func GenerateToken(userID uint) (string, error) {
 	claims := jwt.MapClaims{
 		"user_id": userID,
@@ -25,7 +25,7 @@ func GenerateToken(userID uint) (string, error) {
 	return tokenString, nil
 }
 
-// Verification du token JWT
+// Verification de l'authentification
 func ValidateToken(tokenString string) (*jwt.Token, error) {
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 		return []byte(os.Getenv("JWT_SECRET")), nil
