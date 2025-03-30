@@ -8,24 +8,24 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-// UserService gère la logique utilisateur
-type UserService struct {
+// logique des utilisateurs
+type Service_Utilisateur struct {
 	UserRepo *repositories.UserRepository
 }
 
 // NewUserService crée une nouvelle instance
-func NewUserService(userRepo *repositories.UserRepository) *UserService {
-	return &UserService{UserRepo: userRepo}
+func NewUserService(userRepo *repositories.UserRepository) *Service_Utilisateur {
+	return &Service_Utilisateur{UserRepo: userRepo}
 }
 
 // RegisterUser enregistre un utilisateur
-func (s *UserService) RegisterUser(email, password string) (*models.User, error) {
+func (s *Service_Utilisateur) RegisterUser(email, password string) (*models.Utilisateur, error) {
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	if err != nil {
 		return nil, err
 	}
 
-	user := &models.User{
+	user := &models.Utilisateur{
 		Email:    email,
 		Password: string(hashedPassword),
 	}
@@ -35,7 +35,7 @@ func (s *UserService) RegisterUser(email, password string) (*models.User, error)
 }
 
 // LoginUser vérifie l'utilisateur et génère un token JWT
-func (s *UserService) LoginUser(email, password string) (string, error) {
+func (s *Service_Utilisateur) LoginUser(email, password string) (string, error) {
 	user, err := s.UserRepo.GetUserByEmail(email)
 	if err != nil {
 		return "", err

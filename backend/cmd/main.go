@@ -37,7 +37,7 @@ func main() {
 	}
 
 	// Migration des modèles
-	db.AutoMigrate(&models.User{}, &models.Transaction{})
+	db.AutoMigrate(&models.Utilisateur{}, &models.Transaction{})
 
 	// Initialisation des repositories
 	userRepo := repositories.NewUserRepository(db)

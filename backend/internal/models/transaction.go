@@ -5,7 +5,7 @@ import "gorm.io/gorm"
 // Transaction représente une transaction financière
 type Transaction struct {
 	gorm.Model
-	UserID uint    `gorm:"not null"`
-	Amount float64 `gorm:"not null"`
-	Type   string  `gorm:"not null"` // "income" ou "expense"
+	UserID  uint    `gorm:"not null"`
+	Montant float64 `gorm:"not null"`
+	Type    string  `gorm:"not null"` // "Revenue" ou "Depense"
 }

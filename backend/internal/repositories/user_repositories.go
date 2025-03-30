@@ -17,13 +17,13 @@ func NewUserRepository(db *gorm.DB) *UserRepository {
 }
 
 // CreateUser ajoute un nouvel utilisateur dans la base de données.
-func (r *UserRepository) CreateUser(user *models.User) error {
+func (r *UserRepository) CreateUser(user *models.Utilisateur) error {
 	return r.DB.Create(user).Error
 }
 
 // GetUserByEmail recherche un utilisateur par email.
-func (r *UserRepository) GetUserByEmail(email string) (*models.User, error) {
-	var user models.User
+func (r *UserRepository) GetUserByEmail(email string) (*models.Utilisateur, error) {
+	var user models.Utilisateur
 	if err := r.DB.Where("email = ?", email).First(&user).Error; err != nil {
 		return nil, err
 	}
@@ -31,8 +31,8 @@ func (r *UserRepository) GetUserByEmail(email string) (*models.User, error) {
 }
 
 // GetUserByID recherche un utilisateur par ID.
-func (r *UserRepository) GetUserByID(id uint) (*models.User, error) {
-	var user models.User
+func (r *UserRepository) GetUserByID(id uint) (*models.Utilisateur, error) {
+	var user models.Utilisateur
 	if err := r.DB.First(&user, id).Error; err != nil {
 		return nil, err
 	}
@@ -40,11 +40,11 @@ func (r *UserRepository) GetUserByID(id uint) (*models.User, error) {
 }
 
 // UpdateUser met à jour un utilisateur existant.
-func (r *UserRepository) UpdateUser(user *models.User) error {
+func (r *UserRepository) UpdateUser(user *models.Utilisateur) error {
 	return r.DB.Save(user).Error
 }
 
 // DeleteUser supprime un utilisateur.
 func (r *UserRepository) DeleteUser(id uint) error {
-	return r.DB.Delete(&models.User{}, id).Error
+	return r.DB.Delete(&models.Utilisateur{}, id).Error
 }

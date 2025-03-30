@@ -16,11 +16,11 @@ func NewTransactionService(transactionRepo *repositories.TransactionRepository) 
 }
 
 // AddTransaction ajoute une transaction
-func (s *TransactionService) AddTransaction(userID uint, amount float64, transType string) (*models.Transaction, error) {
+func (s *TransactionService) AddTransaction(userID uint, montant float64, transType string) (*models.Transaction, error) {
 	transaction := &models.Transaction{
-		UserID: userID,
-		Amount: amount,
-		Type:   transType,
+		UserID:  userID,
+		Montant: montant,
+		Type:    transType,
 	}
 
 	err := s.TransactionRepo.CreateTransaction(transaction)

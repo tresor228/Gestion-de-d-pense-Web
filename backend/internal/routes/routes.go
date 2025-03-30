@@ -8,12 +8,12 @@ import (
 )
 
 // SetupRoutes initialise les routes
-func SetupRoutes(app *fiber.App, userHandler *handlers.UserHandler, transactionHandler *handlers.TransactionHandler) {
+func SetupRoutes(app *fiber.App, userHandler *handlers.Gestion_Utilisateur, transactionHandler *handlers.TransactionHandler) {
 	api := app.Group("/api")
 
 	// Routes publiques
-	api.Post("/register", userHandler.Register)
-	api.Post("/login", userHandler.Login)
+	api.Post("/register", userHandler.Inscription)
+	api.Post("/login", userHandler.Connexion)
 
 	// Routes protégées
 	api.Use(middleware.AuthMiddleware)
