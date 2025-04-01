@@ -18,4 +18,6 @@ func SetupRoutes(app *fiber.App, userHandler *handlers.Gestion_Utilisateur, tran
 	// Routes protégées
 	api.Use(middleware.AuthMiddleware)
 	api.Post("/transaction", transactionHandler.Ajout_Transaction)
+	app.Delete("/api/transactions/:id", transactionHandler.Supprimer_Transaction)
+
 }

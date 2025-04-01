@@ -35,3 +35,15 @@ func (h *Controleur_Transaction) Ajout_Transaction(c *fiber.Ctx) error {
 
 	return c.Status(201).JSON(transaction)
 }
+
+// DeleteTransaction supprime une transaction
+func (h *Controleur_Transaction) Supprimer_Transaction(c *fiber.Ctx) error {
+	id := c.Params("id")
+
+	err := h.TransactionService.Suppression_Transaction(id)
+	if err != nil {
+		return c.Status(500).JSON(fiber.Map{"erreur": "Impossible de supprimer la transaction"})
+	}
+
+	return c.Status(200).JSON(fiber.Map{"message": "Transaction supprimée avec succès"})
+}

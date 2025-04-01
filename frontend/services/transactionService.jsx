@@ -1,14 +1,24 @@
-import API from './api';
+import axios from "axios";
 
-export const getTransactions = async () => {
-  const response = await API.get('/transactions');
+const API_URL = process.env.REACT_APP_API_URL + "/transactions";
+
+const getTransactions = async () => {
+  const response = await axios.get(API_URL, {
+    headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+  });
   return response.data;
 };
 
-export const addTransaction = async (transaction) => {
-  return await API.post('/transactions', transaction);
+const addTransaction = async (transaction) => {
+  await axios.post(API_URL, transaction, {
+    headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+  });
 };
 
-export const deleteTransaction = async (id) => {
-  return await API.delete(`/transactions/${id}`);
+const deleteTransaction = async (id) => {
+  await axios.delete(`${API_URL}/${id}`, {
+    headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+  });
 };
+
+export default { getTransactions, addTransaction, deleteTransaction };

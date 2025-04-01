@@ -27,6 +27,14 @@ const Dashboard = () => {
     loadTransactions();
   };
 
+  const handleDeleteTransaction = async (id) => {
+    try {
+      await transactionService.deleteTransaction(id);
+      fetchTransactions(); // Recharge les transactions après suppression
+    } catch (error) {
+      console.error("Erreur lors de la suppression :", error);
+    }
+  };
   return (
     <div className="p-6">
       <h2 className="text-xl font-bold">Gestion des Dépenses</h2>
@@ -48,5 +56,23 @@ const Dashboard = () => {
     </div>
   );
 };
+<ul className="mt-2">
+  {transactions.map((transaction) => (
+    <li
+      key={transaction.id}
+      className={`p-2 border-b flex justify-between items-center ${
+        transaction.type === "income" ? "text-green-500" : "text-red-500"
+      }`}
+    >
+      <span>{transaction.description} - {transaction.amount} FCFA</span>
+      <button
+        onClick={() => handleDeleteTransaction(transaction.id)}
+        className="bg-red-500 text-white p-1 rounded hover:bg-red-700"
+      >
+        Supprimer
+      </button>
+    </li>
+  ))}
+</ul>
 
 export default Dashboard;

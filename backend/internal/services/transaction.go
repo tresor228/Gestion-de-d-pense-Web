@@ -26,3 +26,12 @@ func (s *Transaction_Service) Create_Transaction(userID uint, montant float64, t
 	err := s.TransactionRepo.Create_Transaction(transaction)
 	return transaction, err
 }
+
+// Supprime une transaction
+func (s *Transaction_Service) Suppression_Transaction(id uint) error {
+	err := s.TransactionRepo.Suppression_Transaction(id)
+	if err != nil {
+		return err
+	}
+	return nil
+}
