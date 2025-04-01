@@ -28,8 +28,8 @@ func (s *Transaction_Service) Create_Transaction(userID uint, montant float64, t
 }
 
 // Supprime une transaction
-func (s *Transaction_Service) Suppression_Transaction(id uint) error {
-	err := s.TransactionRepo.Suppression_Transaction(id)
+func (s *Transaction_Service) Suppression_Transaction(id string) error {
+	err := s.TransactionRepo.Suppression_Transaction(id) // Supprimer les guillemets
 	if err != nil {
 		return err
 	}

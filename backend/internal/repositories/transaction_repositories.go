@@ -45,6 +45,6 @@ func (r *Gestionnaire_Transaction) Mise_a_jour_Transaction(transaction *models.T
 }
 
 // Suppression d'une transaction
-func (r *Gestionnaire_Transaction) Suppression_Transaction(id uint) error {
+func (r *Gestionnaire_Transaction) Suppression_Transaction(id string) error {
 	return r.DB.Delete(&models.Transaction{}, id).Error
 }

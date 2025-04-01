@@ -1,12 +1,14 @@
 package main
 
 import (
+	"fmt"
 	"gestion-de-depense/backend/internal/handlers"
 	"gestion-de-depense/backend/internal/models"
 	"gestion-de-depense/backend/internal/repositories"
 	"gestion-de-depense/backend/internal/routes"
 	"gestion-de-depense/backend/internal/services"
 	"log"
+	"os"
 
 	"github.com/gofiber/fiber/v2"
 	"gorm.io/driver/sqlite"
@@ -17,10 +19,12 @@ import (
 
 func main() {
 	// Charger .env
-	err := godotenv.Load()
+	err := godotenv.Load("cmd/.env")
 	if err != nil {
 		log.Fatal("Erreur du Chargement du fichier .env")
 	}
+
+	fmt.Println("DB_PATH:", os.Getenv("DB_PATH"))
 
 	// Connexion DB
 	db, err := gorm.Open(sqlite.Open("expenses.db"), &gorm.Config{})
