@@ -10,15 +10,18 @@ const AppRoutes = () => {
   return (
     <Router>
       <Routes>
+        {/* Redirection vers /login si aucune route ne correspond */}
+        <Route path="/" element={<Navigate to="/login" />} />
+        
+
+        {/* Routes publiques */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+
+        {/* Routes protégées */}
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="/transactions" element={<ProtectedRoute><Transactions /></ProtectedRoute>} />
         <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-        <Route path="/" element={<Navigate to="/login" />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/transactions" element={<Transactions />} />
-        <Route path="/profile" element={<Profile />} />
       </Routes>
     </Router>
   );
